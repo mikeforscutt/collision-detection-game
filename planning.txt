@@ -10,3 +10,9 @@ The shapes and their coordinates can be randomly generated or user-provided. No 
 2.) As a user, I want to add a selected shape to the canvas
 3.) When a shape collides with another shape, change colour of the shape
 4.) If all of the shapes collide display message to user 
+
+Create a function to add a shape (could have a little form to determine form shape from a select box), width, height inputs, with button and on click add the shape.
+
+Add function to detect collision, on page load to detect whats already there, then onclick of the add button to run the check after the shape is added. If it is, then alter the colour.
+
+Create 3rd function to test if all collided and if so show error message to user.
