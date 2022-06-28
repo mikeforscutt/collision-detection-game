@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collision Detection</title>
+    <link rel="stylesheet" href="src/sass/main.scss" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="header__logo">Collision Detection Game</h1>
+        <h2 class="header__info">Developed by Michael Forscutt</h2>
+      </header>
+      <div class="user_controls">
+        <p class="lead">
+          Welcome to the <strong>Collision Detection</strong> game
+        </p>
+        <p>Please select a shape:</p>
+
+        <form class="user_controls__form">
+          <label for="shapes">Choose a shape:</label>
+          <select id="shapes" name="shapes">
+            <option value="square">Square</option>
+            <option value="circle">Circle</option>
+            <option value="triangle">Triangle</option>
+          </select>
+          <input type="submit" />
+        </form>
+      </div>
+      <canvas id="myCanvas" width="750" height="400"></canvas>
+    </div>
+    <script defer src="src/js/script.js" type="module"></script>
+  </body>
+</html>

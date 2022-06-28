@@ -1,0 +1,12 @@
+Collision Detection
+Given the 2D coordinates and dimensions of multiple objects on a 2D plane. We want to determine if any of these objects intersect or occupy the same space.
+Bonus points if the solution allows for 3D coordinates and/or supports different shapes.
+
+While seeing the business logic (using JavaScript) would be important, seeing a visual representation as well would be welcome.
+
+The shapes and their coordinates can be randomly generated or user-provided. No specific requirement on the structure you should use for the solution or for defining a shape – can be as simple as an array [[0,0],[1,0],[0,1],[1,1]] to define a square of width ‘1’ – I want to be able to see a solution that can be run and verified that it calculates the result correctly.
+
+1.) As a user, I want to see if any shapes on the canvas collide
+2.) As a user, I want to add a selected shape to the canvas
+3.) When a shape collides with another shape, change colour of the shape
+4.) If all of the shapes collide display message to user 
