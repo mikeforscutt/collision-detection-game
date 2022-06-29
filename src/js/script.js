@@ -15,38 +15,19 @@ class Rectangle {
   }
 }
 class Triangle {
-  constructor(x = 0, y = 0, fillColor = "#000") {
+  constructor(options) {
     // Settings
-    this.x = x;
-    this.y = y;
-    this.fillColor = fillColor;
-    // Setup everything once parameters are setup
-    this.setup();
-  }
-  setup() {
-    // Move context to position
-    ctx.translate(this.x, this.y);
-    // Draw from new context position
-    this.draw();
-    // Restore context back to initial position
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-  }
-  draw() {
-    // Draw triangle
-    ctx.beginPath();
-    ctx.lineTo(0, 0);
-    ctx.lineTo(80, 80);
-    ctx.lineTo(0, 160);
-    ctx.closePath();
-    // Fill color
-    ctx.fillStyle = this.fillColor;
-    ctx.fill();
+    this.x = options.x;
+    this.y = options.y;
+    this.fillColor = options.fillColor;
   }
 }
+
 // Class that holds a collection of Rectangles and properties and functions for the group
-class Rectangles {
+class Shapes {
   constructor() {
     this.Rectangles = [];
+    this.Triangles = [];
   }
   // create a new rectangle and save it in the collection
   newRectangle() {
@@ -63,45 +44,72 @@ class Rectangles {
   get allRectangles() {
     return this.Rectangles;
   }
-  // this could include summary stats like average score, etc. For simplicy, just the count for now
   get numberOfRectangles() {
     return this.Rectangles.length;
   }
-}
-class Triangles {
-  constructor() {
-    this.Triangles = [];
-  }
-  // create a new rectangle and save it in the collection
   newTriangle() {
-    let t = new Triangle({});
-    this.Rectangles.push(s);
-    return s;
+    let t = new Triangle({
+      x: Math.floor(Math.random() * (canvas.width - 25)),
+      y: Math.floor(Math.random() * 350),
+      fillColor: "#FEB249",
+    });
+    this.Triangles.push(t);
+    return t;
+  }
+  get allTriangles() {
+    return this.Triangles;
+  }
+  get numberOfTriangles() {
+    return this.Triangles.length;
   }
 }
 
-let game = new Rectangles();
-game.newRectangle();
-game.newRectangle();
-game.newRectangle();
+let shape = new Shapes();
+shape.newRectangle();
+shape.newRectangle();
+shape.newRectangle();
+shape.newTriangle();
+shape.newTriangle();
+shape.newTriangle();
 
-console.log(game.allRectangles);
+console.log(shape.allTriangles);
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  game.Rectangles.forEach(drawBox);
+  shape.Rectangles.forEach(drawBox);
+  shape.Triangles.forEach(drawTri);
 }
 
 function drawBox(box) {
   ctx.fillStyle = box.color;
   ctx.fillRect(box.x, box.y, box.width, box.height);
 }
+function drawTri(tri) {
+  // Draw triangle
+  ctx.beginPath();
+  ctx.lineTo(0, 0);
+  ctx.lineTo(80, 80);
+  ctx.lineTo(0, 160);
+  ctx.closePath();
+  // Fill color
+  ctx.fillStyle = this.fillColor;
+  ctx.fill();
+}
 
 var form = document.getElementById("user_form");
 function handleForm(event) {
   event.preventDefault();
-  game.newRectangle();
-  draw();
+
+  let selectedShape = document.getElementById("shapes").value;
+
+  if (selectedShape === "square") {
+    shape.newRectangle();
+    draw();
+  } else if (selectedShape === "triangle") {
+    shape.newTriangle();
+    draw();
+  } else {
+  }
 }
 form.addEventListener("submit", handleForm);
 
