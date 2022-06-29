@@ -19,18 +19,22 @@
         </p>
         <p>Please select a shape:</p>
 
-        <form class="user_controls__form">
+        <form id="user_form" class="user_controls__form">
           <label for="shapes">Choose a shape:</label>
           <select id="shapes" name="shapes">
             <option value="square">Square</option>
             <option value="circle">Circle</option>
             <option value="triangle">Triangle</option>
           </select>
+
           <input type="submit" />
         </form>
       </div>
-      <canvas id="myCanvas" width="750" height="400"></canvas>
+      <canvas id="canvas">
+        Your browser does not support the HTML5 canvas tag.
+      </canvas>
     </div>
-    <script defer src="src/js/script.js" type="module"></script>
+    <script></script>
+    <script type="text/javascript" src="src/js/Script.js"></script>
   </body>
 </html>
