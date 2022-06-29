@@ -51,7 +51,7 @@ class Shapes {
   }
   // create a new rectangle and save it in the collection
   newRectangle() {
-    let s = new Rectangle({
+    let newRect = new Rectangle({
       x: Math.floor(Math.random() * (canvas.width - 25)),
       y: Math.floor(Math.random() * 350),
       width: 50,
@@ -59,8 +59,61 @@ class Shapes {
       color: "#FEB249",
       speed: 5,
     });
-    this.Rectangles.push(s);
-    return s;
+
+    // checking collision box with list
+    let isCollision = false;
+    for (var i = 0; i < this.Rectangles.length; i++) {
+      let item = this.Rectangles[i];
+
+      // checking left-top
+      if (
+        item.x <= newRect.x &&
+        newRect.x <= item.x + item.width &&
+        item.y <= newRect.y &&
+        newRect.y <= item.y + item.height
+      ) {
+        isCollision = true;
+        break;
+      }
+      // checking right-top
+      if (
+        item.x <= newRect.x + newRect.width &&
+        newRect.x + newRect.width <= item.x + item.width &&
+        item.y <= newRect.y &&
+        newRect.y <= item.y + item.height
+      ) {
+        isCollision = true;
+        break;
+      }
+      // checking left-bottom
+      if (
+        item.x <= newRect.x &&
+        newRect.x <= item.x + item.width &&
+        item.y <= newRect.y + newRect.height &&
+        newRect.y + newRect.height <= item.y + item.height
+      ) {
+        isCollision = true;
+        break;
+      }
+      // checking right-bottom
+      if (
+        item.x <= newRect.x + newRect.width &&
+        newRect.x + newRect.width <= item.x + item.width &&
+        item.y <= newRect.y + newRect.height &&
+        newRect.y + newRect.height <= item.y + item.height
+      ) {
+        isCollision = true;
+        break;
+      }
+    }
+
+    if (isCollision) {
+      alert("collision =========");
+    }
+
+    this.Rectangles.push(newRect);
+
+    return newRect;
   }
   get allRectangles() {
     return this.Rectangles;
@@ -105,13 +158,7 @@ function draw() {
   //   shape.Rectangles.forEach(drawBox);
   // }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  shape.Rectangles.forEach(myFunction);
-
-  function myFunction(item, index, arr) {
-    let id = index;
-    console.log(id);
-  }
+  shape.Rectangles.forEach(drawBox);
 }
 
 function drawBox(box) {
