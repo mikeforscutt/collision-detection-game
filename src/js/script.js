@@ -12,6 +12,26 @@ class Rectangle {
     this.height = options.height || 50;
     this.color = options.color || "#000000";
     this.speed = options.speed || 5;
+    this.collideWith = function (otherobject) {
+      var myleft = this.x;
+      var myright = this.x + this.width;
+      var mytop = this.y;
+      var mybottom = this.y + this.height;
+      var otherleft = otherobject.x;
+      var otherright = otherobject.x + otherobject.width;
+      var othertop = otherobject.y;
+      var otherbottom = otherobject.y + otherobject.height;
+      var collision = true;
+      if (
+        mybottom <= othertop ||
+        mytop >= otherbottom ||
+        myright <= otherleft ||
+        myleft >= otherright
+      ) {
+        collision = false;
+      }
+      return collision;
+    };
   }
 }
 class Triangle {
@@ -37,6 +57,7 @@ class Shapes {
       width: 50,
       height: 50,
       color: "#FEB249",
+      speed: 5,
     });
     this.Rectangles.push(s);
     return s;
@@ -68,33 +89,46 @@ let shape = new Shapes();
 shape.newRectangle();
 shape.newRectangle();
 shape.newRectangle();
-shape.newTriangle();
-shape.newTriangle();
-shape.newTriangle();
-
-console.log(shape.allTriangles);
 
 function draw() {
+  // shape.Triangles.forEach(drawTri);
+
+  // let value = shape.Rectangles;
+  // console.log(value);
+
+  // if (shape.Rectangles.collideWith(shape.Rectangle)) {
+  //   ctx.font = "24px sans-serif";
+  //   ctx.fillStyle = "#002447";
+  //   ctx.fillText("COLLISION DETECTED", 50, 50);
+  // } else {
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   shape.Rectangles.forEach(drawBox);
+  // }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  shape.Rectangles.forEach(drawBox);
-  shape.Triangles.forEach(drawTri);
+
+  shape.Rectangles.forEach(myFunction);
+
+  function myFunction(item, index, arr) {
+    let id = index;
+    console.log(id);
+  }
 }
 
 function drawBox(box) {
   ctx.fillStyle = box.color;
   ctx.fillRect(box.x, box.y, box.width, box.height);
 }
-function drawTri(tri) {
-  // Draw triangle
-  ctx.beginPath();
-  ctx.lineTo(0, 0);
-  ctx.lineTo(80, 80);
-  ctx.lineTo(0, 160);
-  ctx.closePath();
-  // Fill color
-  ctx.fillStyle = this.fillColor;
-  ctx.fill();
-}
+// function drawTri(tri) {
+//   // Draw triangle
+//   ctx.beginPath();
+//   ctx.lineTo(0, 0);
+//   ctx.lineTo(tri.x, tri.x);
+//   ctx.lineTo(0, tri.y);
+//   ctx.closePath();
+//   // Fill color
+//   ctx.fillStyle = this.fillColor;
+//   ctx.fill();
+// }
 
 var form = document.getElementById("user_form");
 function handleForm(event) {
