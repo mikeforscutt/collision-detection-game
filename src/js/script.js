@@ -1,7 +1,23 @@
-const canvas = document.getElementById("myCanvas");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-canvas.width = 500;
-canvas.height = 400;
+canvas.width = 800;
+canvas.height = 500;
+let squares = [
+  new Box({
+    x: Math.floor(Math.random() * (canvas.width - 25)),
+    y: Math.floor(Math.random() * 350),
+    width: 50,
+    height: 50,
+    color: "#FEB249",
+  }),
+  new Box({
+    x: Math.floor(Math.random() * (canvas.width - 45)),
+    y: Math.floor(Math.random() * 350),
+    width: 50,
+    height: 50,
+    color: "#000",
+  }),
+];
 let keys = {};
 
 function Box(options) {
@@ -33,22 +49,6 @@ function Box(options) {
     return collision;
   };
 }
-let player = new Box({
-  X: Math.floor(Math.random() * (canvas.width - 25)),
-  y: Math.floor(Math.random() * (canvas.height - 25)),
-  width: 50,
-  height: 50,
-  color: "#53D3D1",
-  speed: 5,
-});
-
-let food = new Box({
-  x: Math.floor(Math.random() * (canvas.width - 25)),
-  y: Math.floor(Math.random() * 350),
-  width: 25,
-  height: 25,
-  color: "#FEB249",
-});
 
 function drawBox(box) {
   ctx.fillStyle = box.color;
@@ -56,23 +56,12 @@ function drawBox(box) {
 }
 
 function draw() {
-  if (player.collideWith(food)) {
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // drawBox(player);
-    // food.x = Math.floor(Math.random() * (canvas.width - 25));
-    // food.y = Math.floor(Math.random() * (canvas.height - 25));
-    // drawBox(food);
-    ctx.font = "24px sans-serif";
-    ctx.fillStyle = "#002447";
-    ctx.fillText("COLLISION!!!!", 50, 50);
-  } else {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBox(player);
-    drawBox(food);
-  }
+  squares.forEach(drawBox);
 }
-function loop() {
+
+var form = document.getElementById("user_form");
+function handleForm(event) {
+  event.preventDefault();
   draw();
-  window.requestAnimationFrame(loop);
 }
-loop();
+form.addEventListener("submit", handleForm);
